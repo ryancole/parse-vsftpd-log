@@ -1,3 +1,4 @@
+#!/usr/bin/python
 
 import sys, time, datetime, logging
 import psycopg2
