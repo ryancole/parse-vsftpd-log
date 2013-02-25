@@ -1,5 +1,5 @@
 
-import sys, time, datetime
+import sys, time, datetime, logging
 import psycopg2
 
 
@@ -34,7 +34,7 @@ def parse_line(line):
 
 def save_entry(details):
     
-    print 'Writing log entry for %s' % details['path']
+    logging.info('Writing log entry for %s' % details['path'])
     
     # database cursor
     cursor = db.cursor()
@@ -92,6 +92,9 @@ if __name__ == '__main__':
     if len(sys.argv) <> 3:
         
         sys.exit('Usage: python parser.py <connection-string> <logfile>')
+    
+    # initialize the logger
+    logging.basicConfig(filename='/var/log/vsftpd-upload-parser.log', level=logging.DEBUG)
     
     # connect to the database
     db = psycopg2.connect(sys.argv[1])
