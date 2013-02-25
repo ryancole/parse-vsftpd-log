@@ -34,7 +34,7 @@ def parse_line(line):
 
 def save_entry(details):
     
-    logging.info('Writing log entry for %s' % details['path'])
+    logging.info('[%s] Writing log entry for %s, uploaded on %s' % (datetime.datetime.now(), details['path'], details['date']))
     
     # database cursor
     cursor = db.cursor()
