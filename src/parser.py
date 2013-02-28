@@ -12,6 +12,9 @@ def parse_line(line):
     
     split_on_comma = line.split(',')
     
+    if len(split_on_comma) <> 4:
+        return None;
+    
     # extract the date information
     date = datetime.datetime.fromtimestamp(time.mktime(time.strptime(split_on_comma[0].split('[')[0].strip())))
     
@@ -25,7 +28,7 @@ def parse_line(line):
     path = split_on_comma[1].strip(' "')
     
     # extract the size of the upload
-    size = int(split_on_comma[2].split()[0].strip())
+    size = long(split_on_comma[2].split()[0].strip())
     
     # extract the speed information
     speed = split_on_comma[3].strip()
@@ -63,6 +66,9 @@ def scan_file(path):
             
             # extract details from the raw log file line
             details = parse_line(line)
+            
+            if details is None:
+                continue
             
             # go to the next log entry if this one is older than the offset
             if details['date'] <= offset[0]:
