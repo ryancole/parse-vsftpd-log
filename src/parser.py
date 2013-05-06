@@ -57,7 +57,7 @@ def scan_file(path):
     
     # get the offset so we can skip all older items
     offset = get_offset()
-    
+
     # iterate over each line in the log file
     for line in open(path, 'r'):
         
@@ -69,9 +69,9 @@ def scan_file(path):
             
             if details is None:
                 continue
-            
+           
             # go to the next log entry if this one is older than the offset
-            if details['date'] <= offset[0]:
+            if offset is not None and details['date'] <= offset[0]:
                 continue
             
             # save the log entry to the database
